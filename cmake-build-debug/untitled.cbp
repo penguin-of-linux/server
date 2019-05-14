@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="untitled"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/penguin/CLionProjects/untitled/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/penguin/CLionProjects/untitled/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/penguin/CLionProjects/untitled/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/penguin/CLionProjects/untitled/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/penguin/CLionProjects/untitled/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/penguin/CLionProjects/untitled/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/penguin/CLionProjects/untitled/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/penguin/CLionProjects/untitled/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/penguin/CLionProjects/untitled/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/penguin/CLionProjects/untitled/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="untitled">
+				<Option output="/home/penguin/CLionProjects/untitled/cmake-build-debug/untitled" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/penguin/CLionProjects/untitled/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/penguin/CLionProjects/untitled/cmake-build-debug/Makefile&quot;  VERBOSE=1 untitled"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/penguin/CLionProjects/untitled/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/penguin/CLionProjects/untitled/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/penguin/CLionProjects/untitled/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="untitled/fast">
+				<Option output="/home/penguin/CLionProjects/untitled/cmake-build-debug/untitled" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/penguin/CLionProjects/untitled/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/penguin/CLionProjects/untitled/cmake-build-debug/Makefile&quot;  VERBOSE=1 untitled/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/penguin/CLionProjects/untitled/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/penguin/CLionProjects/untitled/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/penguin/CLionProjects/untitled/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/penguin/CLionProjects/untitled/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/penguin/CLionProjects/untitled/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/penguin/CLionProjects/untitled/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/penguin/CLionProjects/untitled/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/penguin/CLionProjects/untitled/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/penguin/CLionProjects/untitled/headers/client.h">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/home/penguin/CLionProjects/untitled/headers/constants.h">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/home/penguin/CLionProjects/untitled/headers/consumer.h">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/home/penguin/CLionProjects/untitled/headers/context.h">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/home/penguin/CLionProjects/untitled/headers/data_structures/btree.h">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/home/penguin/CLionProjects/untitled/headers/data_structures/heap.h">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/home/penguin/CLionProjects/untitled/headers/data_structures/queue.h">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/home/penguin/CLionProjects/untitled/headers/dictionary.h">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/home/penguin/CLionProjects/untitled/headers/event.h">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/home/penguin/CLionProjects/untitled/headers/event_handlers/confirm_handler.h">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/home/penguin/CLionProjects/untitled/headers/event_handlers/prepare_event_handler.h">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/home/penguin/CLionProjects/untitled/headers/event_handlers/put_event_handler.h">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/home/penguin/CLionProjects/untitled/headers/event_handlers/receive_event_handler.h">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/home/penguin/CLionProjects/untitled/headers/event_handlers/send_event_handler.h">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/home/penguin/CLionProjects/untitled/headers/event_handlers/time_expired_handler.h">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/home/penguin/CLionProjects/untitled/headers/server.h">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/home/penguin/CLionProjects/untitled/src/client.c">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/home/penguin/CLionProjects/untitled/src/consumer.c">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/home/penguin/CLionProjects/untitled/src/data_structures/btree.c">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/home/penguin/CLionProjects/untitled/src/data_structures/heap.c">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/home/penguin/CLionProjects/untitled/src/data_structures/queue.c">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/home/penguin/CLionProjects/untitled/src/dictionary.c">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/home/penguin/CLionProjects/untitled/src/event_handlers/confirm_handler.c">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/home/penguin/CLionProjects/untitled/src/event_handlers/prepare_event_handler.c">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/home/penguin/CLionProjects/untitled/src/event_handlers/put_event_handler.c">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/home/penguin/CLionProjects/untitled/src/event_handlers/receiver_event_handler.c">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/home/penguin/CLionProjects/untitled/src/event_handlers/send_event_handler.c">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/home/penguin/CLionProjects/untitled/src/event_handlers/time_expired_handler.c">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/home/penguin/CLionProjects/untitled/src/main.c">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/home/penguin/CLionProjects/untitled/src/server.c">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/home/penguin/CLionProjects/untitled/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
