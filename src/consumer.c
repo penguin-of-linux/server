@@ -25,7 +25,7 @@ void handle_event(StsHeader* queue, Event* event, Node* context_btree, Heap* con
 
     if(is_send_event(event->commandId))
     {
-        handle_send_event(event);
+        handle_send_event(event, memory);
     }
 
     if(is_receive_event(event->commandId))

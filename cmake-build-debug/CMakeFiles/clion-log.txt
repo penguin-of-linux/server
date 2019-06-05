@@ -1,4 +1,4 @@
-/home/penguin/Загрузки/clion-2018.3.2/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/penguin/CLionProjects/untitled
+/home/penguin/Загрузки/clion-2018.3.2/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/penguin/CLionProjects/server
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/penguin/CLionProjects/untitled/cmake-build-debug
+-- Build files have been written to: /home/penguin/CLionProjects/server/cmake-build-debug

@@ -4,20 +4,21 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/home/penguin/CLionProjects/untitled/src/client.c" "/home/penguin/CLionProjects/untitled/cmake-build-debug/CMakeFiles/untitled.dir/src/client.c.o"
-  "/home/penguin/CLionProjects/untitled/src/consumer.c" "/home/penguin/CLionProjects/untitled/cmake-build-debug/CMakeFiles/untitled.dir/src/consumer.c.o"
-  "/home/penguin/CLionProjects/untitled/src/data_structures/btree.c" "/home/penguin/CLionProjects/untitled/cmake-build-debug/CMakeFiles/untitled.dir/src/data_structures/btree.c.o"
-  "/home/penguin/CLionProjects/untitled/src/data_structures/heap.c" "/home/penguin/CLionProjects/untitled/cmake-build-debug/CMakeFiles/untitled.dir/src/data_structures/heap.c.o"
-  "/home/penguin/CLionProjects/untitled/src/data_structures/queue.c" "/home/penguin/CLionProjects/untitled/cmake-build-debug/CMakeFiles/untitled.dir/src/data_structures/queue.c.o"
-  "/home/penguin/CLionProjects/untitled/src/dictionary.c" "/home/penguin/CLionProjects/untitled/cmake-build-debug/CMakeFiles/untitled.dir/src/dictionary.c.o"
-  "/home/penguin/CLionProjects/untitled/src/event_handlers/confirm_handler.c" "/home/penguin/CLionProjects/untitled/cmake-build-debug/CMakeFiles/untitled.dir/src/event_handlers/confirm_handler.c.o"
-  "/home/penguin/CLionProjects/untitled/src/event_handlers/prepare_event_handler.c" "/home/penguin/CLionProjects/untitled/cmake-build-debug/CMakeFiles/untitled.dir/src/event_handlers/prepare_event_handler.c.o"
-  "/home/penguin/CLionProjects/untitled/src/event_handlers/put_event_handler.c" "/home/penguin/CLionProjects/untitled/cmake-build-debug/CMakeFiles/untitled.dir/src/event_handlers/put_event_handler.c.o"
-  "/home/penguin/CLionProjects/untitled/src/event_handlers/receiver_event_handler.c" "/home/penguin/CLionProjects/untitled/cmake-build-debug/CMakeFiles/untitled.dir/src/event_handlers/receiver_event_handler.c.o"
-  "/home/penguin/CLionProjects/untitled/src/event_handlers/send_event_handler.c" "/home/penguin/CLionProjects/untitled/cmake-build-debug/CMakeFiles/untitled.dir/src/event_handlers/send_event_handler.c.o"
-  "/home/penguin/CLionProjects/untitled/src/event_handlers/time_expired_handler.c" "/home/penguin/CLionProjects/untitled/cmake-build-debug/CMakeFiles/untitled.dir/src/event_handlers/time_expired_handler.c.o"
-  "/home/penguin/CLionProjects/untitled/src/main.c" "/home/penguin/CLionProjects/untitled/cmake-build-debug/CMakeFiles/untitled.dir/src/main.c.o"
-  "/home/penguin/CLionProjects/untitled/src/server.c" "/home/penguin/CLionProjects/untitled/cmake-build-debug/CMakeFiles/untitled.dir/src/server.c.o"
+  "/home/penguin/CLionProjects/server/src/checksum.c" "/home/penguin/CLionProjects/server/cmake-build-debug/CMakeFiles/untitled.dir/src/checksum.c.o"
+  "/home/penguin/CLionProjects/server/src/client.c" "/home/penguin/CLionProjects/server/cmake-build-debug/CMakeFiles/untitled.dir/src/client.c.o"
+  "/home/penguin/CLionProjects/server/src/consumer.c" "/home/penguin/CLionProjects/server/cmake-build-debug/CMakeFiles/untitled.dir/src/consumer.c.o"
+  "/home/penguin/CLionProjects/server/src/data_structures/btree.c" "/home/penguin/CLionProjects/server/cmake-build-debug/CMakeFiles/untitled.dir/src/data_structures/btree.c.o"
+  "/home/penguin/CLionProjects/server/src/data_structures/heap.c" "/home/penguin/CLionProjects/server/cmake-build-debug/CMakeFiles/untitled.dir/src/data_structures/heap.c.o"
+  "/home/penguin/CLionProjects/server/src/data_structures/queue.c" "/home/penguin/CLionProjects/server/cmake-build-debug/CMakeFiles/untitled.dir/src/data_structures/queue.c.o"
+  "/home/penguin/CLionProjects/server/src/dictionary.c" "/home/penguin/CLionProjects/server/cmake-build-debug/CMakeFiles/untitled.dir/src/dictionary.c.o"
+  "/home/penguin/CLionProjects/server/src/event_handlers/confirm_handler.c" "/home/penguin/CLionProjects/server/cmake-build-debug/CMakeFiles/untitled.dir/src/event_handlers/confirm_handler.c.o"
+  "/home/penguin/CLionProjects/server/src/event_handlers/prepare_event_handler.c" "/home/penguin/CLionProjects/server/cmake-build-debug/CMakeFiles/untitled.dir/src/event_handlers/prepare_event_handler.c.o"
+  "/home/penguin/CLionProjects/server/src/event_handlers/put_event_handler.c" "/home/penguin/CLionProjects/server/cmake-build-debug/CMakeFiles/untitled.dir/src/event_handlers/put_event_handler.c.o"
+  "/home/penguin/CLionProjects/server/src/event_handlers/receiver_event_handler.c" "/home/penguin/CLionProjects/server/cmake-build-debug/CMakeFiles/untitled.dir/src/event_handlers/receiver_event_handler.c.o"
+  "/home/penguin/CLionProjects/server/src/event_handlers/send_event_handler.c" "/home/penguin/CLionProjects/server/cmake-build-debug/CMakeFiles/untitled.dir/src/event_handlers/send_event_handler.c.o"
+  "/home/penguin/CLionProjects/server/src/event_handlers/time_expired_handler.c" "/home/penguin/CLionProjects/server/cmake-build-debug/CMakeFiles/untitled.dir/src/event_handlers/time_expired_handler.c.o"
+  "/home/penguin/CLionProjects/server/src/main.c" "/home/penguin/CLionProjects/server/cmake-build-debug/CMakeFiles/untitled.dir/src/main.c.o"
+  "/home/penguin/CLionProjects/server/src/server.c" "/home/penguin/CLionProjects/server/cmake-build-debug/CMakeFiles/untitled.dir/src/server.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

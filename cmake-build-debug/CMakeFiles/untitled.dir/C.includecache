@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/penguin/CLionProjects/untitled/headers/client.h
+/home/penguin/CLionProjects/server/headers/client.h
 netinet/in.h
 -
 stdio.h
@@ -16,55 +16,9 @@ sys/socket.h
 stdlib.h
 -
 
-/home/penguin/CLionProjects/untitled/headers/consumer.h
-data_structures/queue.h
-/home/penguin/CLionProjects/untitled/headers/data_structures/queue.h
-data_structures/btree.h
-/home/penguin/CLionProjects/untitled/headers/data_structures/btree.h
-data_structures/heap.h
-/home/penguin/CLionProjects/untitled/headers/data_structures/heap.h
-
-/home/penguin/CLionProjects/untitled/headers/context.h
-netinet/in.h
+/home/penguin/CLionProjects/server/src/client.c
+poll.h
 -
-
-/home/penguin/CLionProjects/untitled/headers/data_structures/btree.h
-../context.h
-/home/penguin/CLionProjects/untitled/headers/context.h
-
-/home/penguin/CLionProjects/untitled/headers/data_structures/heap.h
-pthread.h
--
-../context.h
-/home/penguin/CLionProjects/untitled/headers/context.h
-
-/home/penguin/CLionProjects/untitled/headers/data_structures/queue.h
-
-/home/penguin/CLionProjects/untitled/headers/server.h
-data_structures/queue.h
-/home/penguin/CLionProjects/untitled/headers/data_structures/queue.h
-data_structures/heap.h
-/home/penguin/CLionProjects/untitled/headers/data_structures/heap.h
-
-/home/penguin/CLionProjects/untitled/src/main.c
-getopt.h
--
-pthread.h
--
-stdio.h
--
-stdlib.h
--
-../headers/consumer.h
-/home/penguin/CLionProjects/untitled/headers/consumer.h
-../headers/server.h
-/home/penguin/CLionProjects/untitled/headers/server.h
-../headers/data_structures/queue.h
-/home/penguin/CLionProjects/untitled/headers/data_structures/queue.h
-../headers/data_structures/btree.h
-/home/penguin/CLionProjects/untitled/headers/data_structures/btree.h
-../headers/data_structures/heap.h
-/home/penguin/CLionProjects/untitled/headers/data_structures/heap.h
 ../headers/client.h
-/home/penguin/CLionProjects/untitled/headers/client.h
+/home/penguin/CLionProjects/server/headers/client.h
 

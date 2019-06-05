@@ -8,15 +8,16 @@ const int RECEIVE_EVENT_CODE = 0x50;
 void handle_receive_event(Node* context_btree, Event *event, unsigned char* memory)
 {
     int block_number = ((short)(event->data[0])) | ((short)(event->data[1] << 8));
+    int offset = ((int)(event->data[2])) | ((int)(event->data[3] << 8)) | ((int)(event->data[4] << 16)) | ((int)(event->data[5] << 24));
 
-    unsigned char data[BLOCK_SIZE];
-    const int memory_idx = block_number * BLOCK_SIZE;
-    for (int i = 0; i < BLOCK_SIZE; i++)
+    unsigned char data[MAX_DATA_LENGTH];
+    const int memory_idx = block_number * BLOCK_SIZE + offset;
+    for (int i = 0; i < MAX_DATA_LENGTH; i++)
     {
         data[i] = memory[memory_idx + i];
     }
 
-    client_sendto((unsigned char *) &data, BLOCK_SIZE,
+    client_sendto((unsigned char *) &data, MAX_DATA_LENGTH,
             (struct sockaddr *) &event->sender_addr_port, sizeof(event->sender_addr_port));
 
     printf("Block {%d} is sent\n", block_number);

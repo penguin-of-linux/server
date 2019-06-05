@@ -1,27 +1,49 @@
+import random
+
 from model import *
 
-#  prepare + put = 150 + 100 = 250 на оба ребра
-# (2) -------- (3) -------- (4)
-#               |
-# send info x 2 | prepare x 2 = 200 ms
-#      = 200 ms |
-#               (1)
-#               |
-# send info x 2 | prepare x 2 = 200 ms
-#      = 200 ms |
-#              (0) -------- (5)
 
 if __name__ == "__main__":
-    model = Model()
-    d = model \
-        .edge(0, 1, 50, 100) \
-        .edge(1, 3, 50, 100) \
-        .edge(2, 3, 50, 100) \
-        .edge(3, 4, 50, 100) \
-        .edge(0, 5, 50, 100) \
-        .send(0, 3, 4, 1) \
-        .send(0, 3, 2, 1) \
-        .calculate()
+    rnd = random.Random()
+    n = rnd.randint(5, 10)
+    m = rnd.randint(0, n * (n - 1))
+    p = rnd.random()
+    print("n: {0}, m: {1}, p: {2}".format(n, m, p))
+    time = 1000
+    p2p_generator = P2PCommandGenerator()
+    m2p_generator = M2PCommandGenerator(1)
 
-    for i in d.keys():
-        print("(%s)-(%s): %s" % (i[0], i[1], d[i]))
+    def generate():
+        # return nx.gnm_random_graph(n, m)
+        return nx.gnp_random_graph(n, p)
+        # return nx.complete_graph(n)
+        # return nx.path_graph(n)
+        # return nx.dense_gnm_random_graph(n, m)
+        # return nx.star_graph(n)
+
+    graph = generate()
+    copy = graph.copy()
+    edges_count = len(graph.edges)
+    print("Сгенерировано ребер: %d" % edges_count)
+
+    p2p_model = Model(n, time, graph, p2p_generator)
+    m2p_model = Model(n, time, copy, m2p_generator)
+
+    stats = p2p_model.calculate()
+    print("P2P:")
+    #print("Max:", stats.max)
+    #print("Average:", stats.average)
+    print("Max max:", max(stats.max.values()))
+    print("Max average:", max(stats.average.values()))
+
+    print("M2P:")
+    stats = m2p_model.calculate()
+    #print("Max:", stats.max)
+    #print("Average:", stats.average)
+    print("Max max:", max(stats.max.values()))
+    print("Max average:", max(stats.average.values()))
+
+# state, псевдотаймер, случайные операции, случайные графы
+# подробное описание - ссылки, алгоритмы рандомизации
+# 2 способа генерирования команд
+# умные передачи

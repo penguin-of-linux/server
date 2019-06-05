@@ -58,7 +58,7 @@ int client_recvfrom(unsigned char* buffer, size_t buffer_length, struct sockaddr
     }
     else if (res == 0)
     {
-        printf("Timeout during recv {%d ms}\n", timeout);
+        printf("Timeout during recv {%d ms}, port %d\n", timeout, htons(client->my_addr_port.sin_port));
     }
     else
     {

@@ -14,23 +14,23 @@ const int PUT_COMMAND__ID = 0x20;
 
 Context* handle_put_event(StsHeader* queue, Node* context_btree, Event *event, Heap* context_heap, unsigned char* memory)
 {
-    int block_number = ((short)(event->data[0])) | ((short)(event->data[1] << 8));
-    short offset = ((short)(event->data[2])) | ((short)(event->data[3] << 8));
-    short length = ((short)(event->data[4])) | ((short)(event->data[5] << 8));
+    printf("in put\n");
+    short block_number = ((short)(event->data[0])) | ((short)(event->data[1] << 8));
+    int offset = ((int)(event->data[2])) | ((int)(event->data[3] << 8)) | ((int)(event->data[4] << 16)) | ((int)(event->data[5] << 24));
+    short length = ((short)(event->data[6])) | ((short)(event->data[7] << 8));
 
     Context* context = Btree.get_or_create(context_btree, block_number);
 
     context->block_number = block_number;
     context->received_length += length;
 
-    const int data_idx = 6;
+    const int data_idx = 8;
     const int memory_idx = block_number * BLOCK_SIZE + offset;
 
     for(int i = memory_idx, j = data_idx; j < data_idx + length; j++, i++)
     {
         memory[i] = event->data[j];
     }
-    //printf("Memory %d %d %d\n", memory[memory_idx], memory[memory_idx + 1], memory[memory_idx + 2]);
 
     if(!context->prepared)
     {

@@ -48,10 +48,10 @@ RM = /home/penguin/Загрузки/clion-2018.3.2/bin/cmake/linux/bin/cmake -E 
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/penguin/CLionProjects/untitled
+CMAKE_SOURCE_DIR = /home/penguin/CLionProjects/server
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/penguin/CLionProjects/untitled/cmake-build-debug
+CMAKE_BINARY_DIR = /home/penguin/CLionProjects/server/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/penguin/CLionProjects/untitled/cmake-build-debug/CMakeFiles /home/penguin/CLionProjects/untitled/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/penguin/CLionProjects/server/cmake-build-debug/CMakeFiles /home/penguin/CLionProjects/server/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/penguin/CLionProjects/untitled/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/penguin/CLionProjects/server/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -122,6 +122,33 @@ untitled: cmake_check_build_system
 untitled/fast:
 	$(MAKE) -f CMakeFiles/untitled.dir/build.make CMakeFiles/untitled.dir/build
 .PHONY : untitled/fast
+
+src/checksum.o: src/checksum.c.o
+
+.PHONY : src/checksum.o
+
+# target to build an object file
+src/checksum.c.o:
+	$(MAKE) -f CMakeFiles/untitled.dir/build.make CMakeFiles/untitled.dir/src/checksum.c.o
+.PHONY : src/checksum.c.o
+
+src/checksum.i: src/checksum.c.i
+
+.PHONY : src/checksum.i
+
+# target to preprocess a source file
+src/checksum.c.i:
+	$(MAKE) -f CMakeFiles/untitled.dir/build.make CMakeFiles/untitled.dir/src/checksum.c.i
+.PHONY : src/checksum.c.i
+
+src/checksum.s: src/checksum.c.s
+
+.PHONY : src/checksum.s
+
+# target to generate assembly for a file
+src/checksum.c.s:
+	$(MAKE) -f CMakeFiles/untitled.dir/build.make CMakeFiles/untitled.dir/src/checksum.c.s
+.PHONY : src/checksum.c.s
 
 src/client.o: src/client.c.o
 
@@ -510,6 +537,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... untitled"
 	@echo "... edit_cache"
+	@echo "... src/checksum.o"
+	@echo "... src/checksum.i"
+	@echo "... src/checksum.s"
 	@echo "... src/client.o"
 	@echo "... src/client.i"
 	@echo "... src/client.s"

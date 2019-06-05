@@ -13,6 +13,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/untitled.dir/src/data_structures/btree.c.o"
   "CMakeFiles/untitled.dir/src/data_structures/heap.c.o"
   "CMakeFiles/untitled.dir/src/event_handlers/receiver_event_handler.c.o"
+  "CMakeFiles/untitled.dir/src/checksum.c.o"
   "untitled.pdb"
   "untitled"
 )
