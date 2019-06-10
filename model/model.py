@@ -1,21 +1,24 @@
-import networkx as nx
 import networkx.algorithms.shortest_paths as shortest_paths
 import random
-import collections
+import math
+import copy
+
+PACKET_WEIGHT = 10
 
 
 class Model:
-    def __init__(self, n, time, graph, command_generator):
+    def __init__(self, node_count, block_count, time, graph, assigner, tasks, nodes_for_block_create):
         self.graph = graph
         self.time = time
-        self.n = n
-        self.command_generator = command_generator
+        self.node_count = node_count
+        self.block_count = block_count
+        self.assigner = assigner
+        self.tasks = tasks
+        self.nodes_for_block_create = nodes_for_block_create
         self.paths = {}
-        for node in range(self.n):
-            self.graph.node[node]["commands"] = collections.deque()
-            self.graph.node[node]["cmd_time"] = 0
+        for node in range(self.node_count):
             self.paths[node] = {}
-            for path_target in range(self.n):
+            for path_target in range(self.node_count):
                 if node == path_target:
                     continue
                 if shortest_paths.has_path(self.graph, node, path_target):
@@ -25,134 +28,125 @@ class Model:
 
     def calculate(self):
         stats = Statistics()
-        for node in range(self.n):
+        for node in range(self.node_count):
             stats.max[node] = stats.average[node] = 0
 
         for t in range(self.time):
-            for node in range(self.n):
-                self.generate_command(node)
-                commands = self.graph.node[node]["commands"]
-                if not commands:
-                    continue
+            # генерируем задачу
+            # найти узлы с нужными данные
+            # передать задачу в параметризованную модель
+            # передавать по одному пакету
+            # для каждой связи своя очередь
+            # пакет делим на несколько еденичных пакетов
+            # за 1 такт обарбатываем каждую очередь
 
-                cmd = commands[-1]
+            # для разных n, матожидание, дисперсия, разные вероятности p, все параметры подвигать
+            # можно рассказать об алгоритмах рандомизации
+            task = self.tasks[t]
+            hosts = self.get_hosts(task.block_number)
+            packets = self.assigner.assign(task, hosts)
+            for packet in packets:
+                if packet.task.target in self.paths[packet.sender]:
+                    self.add_packet(packet.sender, packet)
 
-                if cmd.target == node:
-                    self.del_command(node)
-                    self.handle_command(cmd, node)
-                    continue
+            self.create_new_block(t)
 
-                cmd_time = self.graph.node[node]["cmd_time"]
-                cmd_time -= 1
-                if cmd_time == 0:
-                    if cmd.target in self.paths[node].keys():
-                        self.add_command(self.paths[node][cmd.target], cmd)
-                    self.del_command(node)
-                else:
-                    self.graph.node[node]["cmd_time"] = cmd_time
+            nodes = list(range(self.node_count))
+            random.shuffle(nodes)
+            for node in nodes:
+                for link_node in self.graph.node[node]["packets"]:
+                    queue = self.graph.node[node]["packets"][link_node]
+
+                    if not queue:
+                        continue
+
+                    packet = queue.pop()
+                    next_node = self.paths[node][packet.task.target]
+                    if next_node != packet.task.target:
+                        self.add_packet(next_node, packet)
+                    else:
+                        self.graph.node[next_node]["data"].add(packet.task.block_number)
+
                 self.calculate_statistics(stats, node)
         return stats
 
-    def add_command(self, node, command):
-        commands = self.graph.node[node]["commands"]
-        if len(commands) == 0:
-            self.graph.node[node]["cmd_time"] = command.weight
-        commands.append(command)
+    def get_hosts(self, block_number):
+        hosts = []
+        for node in range(self.node_count):
+            if block_number in self.graph.node[node]["data"]:
+                hosts.append(node)
+        return hosts
 
-    def del_command(self, node):
-        commands = self.graph.node[node]["commands"]
-        commands.pop()
-        cmd = commands[-1] if len(commands) > 0 else None
-        self.graph.node[node]["cmd_time"] = cmd.weight if cmd else 0
+    def add_packet(self, sender, packet):
+        next_node = self.paths[sender][packet.task.target]
+        self.graph.node[sender]["packets"][next_node].appendleft(packet)
 
-    def generate_command(self, node):
-        rnd = random.Random()
-        x = rnd.random()
-        if x < 0.6:
-            generated = self.command_generator.generate(node, self.n, rnd)
-            for g in generated:
-                self.add_command(g.sender, g.command)
-
-    def handle_command(self, cmd, node):
-        if isinstance(cmd, SendCommand):
-            self.add_command(node, PutCommand(cmd.target))
-        if isinstance(cmd, LightSendCommand):
-            self.add_command(node, LightPutCommand(cmd.target))
+    def create_new_block(self, t):
+        new_block_number = self.block_count
+        self.block_count += 1
+        host = self.nodes_for_block_create[t]
+        self.graph.node[host]["data"].add(new_block_number)
 
     def calculate_statistics(self, stats, node):
-        commands = self.graph.node[node]["commands"]
-        count = len(commands)
+        current_packets = [p for packets in self.graph.node[node]["packets"].values() for p in packets]
+        count = len(current_packets)
         stats.average[node] += count / self.time
         stats.max[node] = stats.max[node] if stats.max[node] > count else count
+        # stats.max_max = stats.max_max if stats.max_max > stats.max[node] else stats.max[node]
+        # stats.max_average = stats.max_average if stats.max_average > stats.average[node] else stats.average[node]
 
 
-class P2PCommandGenerator:
+class P2PAssigner:
     @staticmethod
-    def generate(sender, node_count, rnd):
-        target = rnd.randint(0, node_count - 1)
-        return [GeneratedCommand(sender, SendCommand(sender, target))]
+    def assign(task, hosts):
+        result = []
+        if len(hosts) == 0:
+            return result
+
+        rnd = random.Random()
+        i = rnd.randint(0, len(hosts) - 1)
+        sender = hosts[i]
+        for _ in range(PACKET_WEIGHT):
+            result.append(Packet(sender, task))
+        return result
 
 
-class M2PCommandGenerator:
+class M2PAssigner:
     def __init__(self, duplication_degree):
         self.duplication_degree = duplication_degree
 
-    @staticmethod
-    def generate(sender, node_count, rnd):
-        target = rnd.randint(0, node_count - 1)
-        return [GeneratedCommand(sender, LightSendCommand(sender, target))]
+    def assign(self, task, hosts):
+        result = []
+        if len(hosts) == 0:
+            return result
+        elif len(hosts) <= self.duplication_degree:
+            senders = hosts
+        else:
+            senders = copy.copy(hosts)
+            random.shuffle(senders)
+            senders = senders[:self.duplication_degree]
 
-    def _generate(self, sender, node_count, rnd):
-        target = rnd.randint(0, node_count - 1)
-        senders = {sender}
-        while len(senders) < self.duplication_degree:
-            sender = rnd.randint(0, node_count - 1)
-            if sender not in senders:
-                senders.add(sender)
-
-        return map(lambda s: GeneratedCommand(s, LightSendCommand(s, target)), senders)
+        for sender in senders:
+            for _ in range(math.ceil(PACKET_WEIGHT / len(senders))):
+                result.append(Packet(sender, task))
+        return result
 
 
-class GeneratedCommand:
-    def __init__(self, sender, command):
+class Packet:
+    def __init__(self, sender, task):
         self.sender = sender
-        self.command = command
+        self.task = task
 
 
-class Command:
-    def __init__(self, weight, target):
-        self.weight = weight
+class Task:
+    def __init__(self, block_number, target):
+        self.block_number = block_number
         self.target = target
-
-
-class PutCommand(Command):
-    def __init__(self, target):
-        super().__init__(3, target)
-
-
-class LightPutCommand(Command):
-    def __init__(self, target):
-        super().__init__(1, target)
-
-
-class PrepareCommand(Command):
-    def __init__(self, target):
-        super().__init__(1, target)
-
-
-class SendCommand(Command):
-    def __init__(self, sender, target):
-        super().__init__(1, target)
-        self.sender = sender
-
-
-class LightSendCommand(Command):
-    def __init__(self, sender, target):
-        super().__init__(1, target)
-        self.sender = sender
 
 
 class Statistics:
     def __init__(self):
         self.average = {}
         self.max = {}
+        # self.max_max = 0
+        # self.max_average = 0
