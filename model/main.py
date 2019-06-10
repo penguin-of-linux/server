@@ -1,14 +1,10 @@
 import networkx as nx
 import collections
+import matplotlib.pyplot as plt
+import numpy as np
 
+from mpl_toolkits.mplot3d import Axes3D
 from model import *
-
-NODE_COUNT = -1
-BLOCK_COUNT = 20
-P = -1
-DUPLICATION_DEGREE = -1
-GENERATE_COMMAND_PROBABILITY = 0.5
-TIME = -1
 
 
 def create_graph():
@@ -71,38 +67,65 @@ def print_overall_stats(stats):
 
     print("Max:", maximum)
     print("Average:", average)
+    return (maximum, average)
+
+
+NODE_COUNT = 20
+BLOCK_COUNT = 20
+P = 0.6
+DUPLICATION_DEGREE = 5
+TIME = 100
 
 
 if __name__ == "__main__":
-    p_values = [0.1, 0.3, 0.5, 0.7, 0.9]
-    for node_count in range(5, 55, 10):
+    xs = []
+    ys = []
+    p2p_maximums = []
+    p2p_averages = []
+    m2p_maximums = []
+    m2p_averages = []
+    
+    p_values = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
+    p_values = [0.1]
+    for n in range(5, 50, 1):
+        NODE_COUNT = n
         for p in p_values:
-            for duplication_degree in range(3, 6):
-                for time in range(100, 1100, 100):
-                    NODE_COUNT = node_count
-                    P = p
-                    DUPLICATION_DEGREE = duplication_degree
-                    TIME = time
-                    print("n: {0}, p: {1}, dup: {2}, time: {3}".format(NODE_COUNT, P, duplication_degree, time))
-                    p2p_stats = []
-                    m2p_stats = []
-                    for i in range(20):
-                        tasks = create_tasks()
-                        nodes_for_block_create = create_nodes_for_create()
+            P = p
+            xs.append(n)
+            ys.append(p)
+            print("n: {0}, p: {1}, time: {2}".format(NODE_COUNT, P, TIME))
+            p2p_stats = []
+            m2p_stats = []
+            for i in range(50):
+                tasks = create_tasks()
+                nodes_for_block_create = create_nodes_for_create()
 
-                        graph = create_graph()
-                        graph_copy = copy.deepcopy(graph)
-                        # print("Сгенерировано ребер: %d" % len(graph.edges))
+                graph = create_graph()
+                graph_copy = copy.deepcopy(graph)
+                # print("Сгенерировано ребер: %d" % len(graph.edges))
 
-                        p2p_model = Model(NODE_COUNT, BLOCK_COUNT, TIME, graph, P2PAssigner(),
-                                          tasks, nodes_for_block_create)
-                        m2p_model = Model(NODE_COUNT, BLOCK_COUNT, TIME, graph_copy, M2PAssigner(DUPLICATION_DEGREE),
-                                          tasks, nodes_for_block_create)
+                p2p_model = Model(NODE_COUNT, BLOCK_COUNT, TIME, graph, P2PAssigner(),
+                                  tasks, nodes_for_block_create)
+                m2p_model = Model(NODE_COUNT, BLOCK_COUNT, TIME, graph_copy, M2PAssigner(DUPLICATION_DEGREE),
+                                  tasks, nodes_for_block_create)
 
-                        p2p_stats.append(p2p_model.calculate())
-                        m2p_stats.append(m2p_model.calculate())
-                        # print(i)
+                p2p_stats.append(p2p_model.calculate())
+                m2p_stats.append(m2p_model.calculate())
+                # print(i)
 
-                    print_overall_stats(p2p_stats)
-                    print_overall_stats(m2p_stats)
-                    print()
+            a = print_overall_stats(p2p_stats)
+            b = print_overall_stats(m2p_stats)
+            p2p_maximums.append(a[0])
+            p2p_averages.append(a[1])
+            m2p_maximums.append(b[0])
+            m2p_averages.append(b[1])
+            print()
+            
+    line1, = plt.plot(xs, p2p_maximums, "yellow", label="p2p max")
+    line2, = plt.plot(xs, p2p_averages, "red", label="p2p average")
+    line3, = plt.plot(xs, m2p_maximums, "green", label="m2p max")
+    line4, = plt.plot(xs, m2p_averages, "blue", label="m2p average")
+    plt.grid(True)
+    plt.legend(handles=[line1, line2, line3, line4])
+    plt.tight_layout()
+    plt.show()
