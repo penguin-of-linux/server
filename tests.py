@@ -64,7 +64,7 @@ class ServerTests(unittest.TestCase):
     def setUp(self):
         self.client1 = Client("127.0.0.1", 1111)
         self.client2 = Client("127.0.0.1", 2222)
-        self.client1.start()
+        #self.client1.start()
         self.client2.start()
 
     def test_put_and_receive(self):
@@ -74,8 +74,8 @@ class ServerTests(unittest.TestCase):
         data_bytes = b"\x01\x02\x03"
         length = len(data)
 
-        self.client1.put(block_number, offset, length, data)
-        result = self.client1.receive(block_number, offset)[:length]
+        #self.client1.put(block_number, offset, length, data)
+        result = self.client2.receive(block_number, offset)[:length]
 
         self.assertEqual(data_bytes, result)
 
@@ -96,7 +96,7 @@ class ServerTests(unittest.TestCase):
 
     def tearDown(self):
         time.sleep(1)
-        self.client1.quit()
+        #self.client1.quit()
         self.client1.dispose()
         self.client2.quit()
         self.client2.dispose()
