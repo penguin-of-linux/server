@@ -86,12 +86,14 @@ if __name__ == "__main__":
     m2p_averages = []
     
     p_values = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
-    p_values = [0.1]
-    for n in range(5, 50, 1):
-        NODE_COUNT = n
+    p_values = [0.6]
+    NODE_COUNT = 10
+    degree_values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    for time in range(100, 2100, 100):
+        TIME = time
         for p in p_values:
             P = p
-            xs.append(n)
+            xs.append(time)
             ys.append(p)
             print("n: {0}, p: {1}, time: {2}".format(NODE_COUNT, P, TIME))
             p2p_stats = []
