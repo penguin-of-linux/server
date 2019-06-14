@@ -1,3 +1,6 @@
+import os
+import sys
+import signal
 import networkx as nx
 import collections
 import matplotlib.pyplot as plt
@@ -110,19 +113,13 @@ def experiment(NODE_COUNT = 20,
   m2p_max = b[0]
   m2p_avg = b[1]
 
-  return ("n{0}_p{1}_d{2}_t{3}.svg".format(NODE_COUNT, P, DUPLICATION_DEGREE, TIME),
-          p2p_max,
-          p2p_avg,
-          m2p_max,
-          m2p_avg)
+  return (p2p_max, p2p_avg, m2p_max, m2p_avg)
   
 def show_svg(name, xs, p2p_maxs, p2p_avgs, m2p_maxs, m2p_avgs):
-  print(nm)
-
-  line1, = plt.plot(xs, p2p_maxs, "lightgray", label="p2p max")
+  line1, = plt.plot(xs, p2p_maxs, "lightgray", label="p2p max", dashes=[8, 2])
   line2, = plt.plot(xs, p2p_avgs, "lightgray", label="p2p average")
   line3, = plt.plot(xs, m2p_maxs, "black", label="m2p max")
-  line4, = plt.plot(xs, m2p_avgs, "black", label="m2p average")
+  line4, = plt.plot(xs, m2p_avgs, "black", label="m2p average", dashes=[8, 2])
 
   plt.grid(True)
   plt.legend(handles=[line1, line2, line3, line4])
@@ -130,34 +127,54 @@ def show_svg(name, xs, p2p_maxs, p2p_avgs, m2p_maxs, m2p_avgs):
   plt.plot()
   plt.savefig(name, format="svg")
 
+def experiment_one():
+  # Эксперимент 1: различное количество узлов с разной плотностью рёбер.
+  # Количество повторов 50. Время эксперимента 500
+
+  pids = []
+  p_values = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
+  for n_count in range(10, 110, 10):
+    pid = os.fork()
+
+    if pid != 0:
+      pids.append(pid)
+    else:
+      xs = []
+      p2p_maxs = []
+      p2p_avgs = []
+      m2p_maxs = []
+      m2p_avgs = []
+
+      for p in p_values:
+        xs.append(p)
+
+        (p2p_max,
+         p2p_avg,
+         m2p_max,
+         m2p_avg) = experiment(NODE_COUNT = n_count,
+                               BLOCK_COUNT = 2000,
+                               TIME = 500,
+                               P = p,
+                               TRIES = 10)
+
+        p2p_maxs.append(p2p_max)
+        p2p_avgs.append(p2p_avg)
+        m2p_maxs.append(m2p_max)
+        m2p_avgs.append(m2p_avg)
+        
+        print() 
+        sys.stdout.flush()
+
+      show_svg("n{0}_p{1}_d{2}_t{3}.svg".format(n_count, "var", 5, 500),
+               xs, p2p_maxs, p2p_avgs, m2p_maxs, m2p_avgs)
+
+  for pid in pids:
+    os.waitpid(pid, 0)
+
+
 if __name__ == "__main__":
-    xs = []
-    ys = []
-    p2p_maximums = []
-    p2p_averages = []
-    m2p_maximums = []
-    m2p_averages = []
-    
-    p_values = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
-    p_values = [0.6]
-    degree_values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    for time in range(100, 2100, 100):
-        for p in p_values:
-            xs.append(time)
-            ys.append(p)
-
-            (nm,
-             p2p_max,
-             p2p_avg,
-             m2p_max,
-             m2p_avg) = experiment(NODE_COUNT = 10, TIME = time, P = p, TRIES = 1)
- 
-            p2p_maximums.append(p2p_max)
-            p2p_averages.append(p2p_avg)
-            m2p_maximums.append(m2p_max)
-            m2p_averages.append(m2p_avg)
-
-            print() 
-
-    show_svg(nm, xs, p2p_maximums, p2p_averages, m2p_maximums, m2p_averages)
-
+  os.setpgrp()
+  try:
+    experiment_one()
+  finally:
+    os.killpg(0, signal.SIGTERM)
