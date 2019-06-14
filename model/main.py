@@ -117,8 +117,8 @@ def experiment(NODE_COUNT = 20,
   return (p2p_max, p2p_avg, m2p_max, m2p_avg)
   
 def show_svg(name, xs, p2p_maxs, p2p_avgs, m2p_maxs, m2p_avgs):
-  line1, = plt.plot(xs, p2p_maxs, "lightgray", label="p2p max", dashes=[8, 2])
-  line2, = plt.plot(xs, p2p_avgs, "lightgray", label="p2p average")
+  line1, = plt.plot(xs, p2p_maxs, "gray", label="p2p max", dashes=[8, 2])
+  line2, = plt.plot(xs, p2p_avgs, "gray", label="p2p average")
   line3, = plt.plot(xs, m2p_maxs, "black", label="m2p max")
   line4, = plt.plot(xs, m2p_avgs, "black", label="m2p average", dashes=[8, 2])
 
