@@ -97,18 +97,38 @@ def experiment(NODE_COUNT = 20,
     m2p_stats.append(m2p_model.calculate())
     # print(i)
 
-    return p2p_stats, m2p_stats
+  a = print_overall_stats(p2p_stats)
+  b = print_overall_stats(m2p_stats)
+
+#   p2p_maxs.append(a[0])
+#   p2p_avgs.append(a[1])
+#   m2p_maxs.append(b[0])
+#   m2p_avgs.append(b[1])
+
+  p2p_max = a[0]
+  p2p_avg = a[1]
+  m2p_max = b[0]
+  m2p_avg = b[1]
+
+  return ("n{0}_p{1}_d{2}_t{3}.svg".format(NODE_COUNT, P, DUPLICATION_DEGREE, TIME),
+          p2p_max,
+          p2p_avg,
+          m2p_max,
+          m2p_avg)
   
-def show_svg(name, xs, p2p_maxs, p2p_avgs, m2p_maxs, m2p_avgs, xs):
-  line1, = plt.plot(xs, p2p_maxs, "yellow", label="p2p max")
-  line2, = plt.plot(xs, p2p_avgs, "red", label="p2p average")
-  line3, = plt.plot(xs, m2p_maxs, "green", label="m2p max")
-  line4, = plt.plot(xs, m2p_avgs, "blue", label="m2p average")
+def show_svg(name, xs, p2p_maxs, p2p_avgs, m2p_maxs, m2p_avgs):
+  print(nm)
+
+  line1, = plt.plot(xs, p2p_maxs, "lightgray", label="p2p max")
+  line2, = plt.plot(xs, p2p_avgs, "lightgray", label="p2p average")
+  line3, = plt.plot(xs, m2p_maxs, "black", label="m2p max")
+  line4, = plt.plot(xs, m2p_avgs, "black", label="m2p average")
 
   plt.grid(True)
   plt.legend(handles=[line1, line2, line3, line4])
   plt.tight_layout()
-  plt.show()
+  plt.plot()
+  plt.savefig(name, format="svg")
 
 if __name__ == "__main__":
     xs = []
@@ -126,15 +146,18 @@ if __name__ == "__main__":
             xs.append(time)
             ys.append(p)
 
-
-            p2p_stats, m2p_stats = experiment(NODE_COUNT = 10,
-                                              TIME = time,
-                                              P = p)
+            (nm,
+             p2p_max,
+             p2p_avg,
+             m2p_max,
+             m2p_avg) = experiment(NODE_COUNT = 10, TIME = time, P = p, TRIES = 1)
  
-            a = print_overall_stats(p2p_stats)
-            b = print_overall_stats(m2p_stats)
-            p2p_maximums.append(a[0])
-            p2p_averages.append(a[1])
-            m2p_maximums.append(b[0])
-            m2p_averages.append(b[1])
+            p2p_maximums.append(p2p_max)
+            p2p_averages.append(p2p_avg)
+            m2p_maximums.append(m2p_max)
+            m2p_averages.append(m2p_avg)
+
             print() 
+
+    show_svg(nm, xs, p2p_maximums, p2p_averages, m2p_maximums, m2p_averages)
+
