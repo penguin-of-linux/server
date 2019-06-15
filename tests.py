@@ -74,7 +74,7 @@ class ServerTests(unittest.TestCase):
         data_bytes = b"\x01\x02\x03"
         length = len(data)
 
-        #self.client1.put(block_number, offset, length, data)
+        self.client2.put(block_number, offset, length, data)
         result = self.client2.receive(block_number, offset)[:length]
 
         self.assertEqual(data_bytes, result)

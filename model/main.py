@@ -79,14 +79,14 @@ TIME = 100
 
 if __name__ == "__main__":
     xs = []
-    ys = []
+    #ys = []
     p2p_maximums = []
     p2p_averages = []
     m2p_maximums = []
     m2p_averages = []
     
     p_values = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
-    p_values = [0.6]
+    #p_values = [0.6]
     NODE_COUNT = 10
     degree_values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     for time in range(100, 2100, 100):
@@ -94,11 +94,11 @@ if __name__ == "__main__":
         for p in p_values:
             P = p
             xs.append(time)
-            ys.append(p)
+            #ys.append(p)
             print("n: {0}, p: {1}, time: {2}".format(NODE_COUNT, P, TIME))
             p2p_stats = []
             m2p_stats = []
-            for i in range(50):
+            for i in range(20):
                 tasks = create_tasks()
                 nodes_for_block_create = create_nodes_for_create()
 
