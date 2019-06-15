@@ -119,8 +119,8 @@ def experiment(NODE_COUNT = 20,
 def show_svg(name, xs, p2p_maxs, p2p_avgs, m2p_maxs, m2p_avgs):
   line1, = plt.plot(xs, p2p_maxs, "gray", label="p2p max", dashes=[8, 2])
   line2, = plt.plot(xs, p2p_avgs, "gray", label="p2p average")
-  line3, = plt.plot(xs, m2p_maxs, "black", label="m2p max")
-  line4, = plt.plot(xs, m2p_avgs, "black", label="m2p average", dashes=[8, 2])
+  line3, = plt.plot(xs, m2p_maxs, "black", label="m2p max", dashes=[8, 2])
+  line4, = plt.plot(xs, m2p_avgs, "black", label="m2p average")
 
   plt.grid(True)
   plt.legend(handles=[line1, line2, line3, line4])
@@ -213,7 +213,7 @@ def experiment_two():
         print() 
         sys.stdout.flush()
 
-      show_svg("n{0}_p{1}_d{2}_t{3}.svg".format(100, 0.5, "var", time),
+      show_svg("n{0}_p{1}_d{2}_t{3}.svg".format(500, 0.5, "var", time),
                xs, p2p_maxs, p2p_avgs, m2p_maxs, m2p_avgs)
 
       exit(0)
